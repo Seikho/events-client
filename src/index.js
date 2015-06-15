@@ -43,4 +43,4 @@ function subscribe(context, event, key, callback) {
     return api;
 }
 
-module.exports = api;
+export { api };
