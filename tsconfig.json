@@ -8,6 +8,8 @@
         "./src/**/*.ts"
     ],
     "files": [
-        "./src/index.ts"
+        "./src/index.ts",
+        "./src/typings/node/node.d.ts",
+        "./src/typings/socket.io-client/socket.io-client.d.ts"
     ]
 }
