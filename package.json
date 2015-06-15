@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/longshot/events-client.git"
+    "url": "git+https://github.com/longshot-io/events-client.git"
   },
   "keywords": [
     "longshot",
@@ -21,9 +21,9 @@
   "author": "Carl Winkler",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/longshot/events-client/issues"
+    "url": "https://github.com/longshot-io/events-client/issues"
   },
-  "homepage": "https://github.com/longshot/events-client#readme",
+  "homepage": "https://github.com/longshot-io/events-client#readme",
   "dependencies": {
     "ls-config": "^0.1.1",
     "socket.io-client": "^1.3.5"
