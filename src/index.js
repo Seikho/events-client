@@ -1,10 +1,4 @@
-import { io } from "socket.io-client";
-
-var api = {
-    sub: subscribe,
-    setHost: setHost,
-    start: start
-};
+var io = require("socket.io-client");
 
 var socketClient = null;
 
@@ -17,7 +11,7 @@ function start() {
 }
 
 function setHost(hostName, port) {
-    socketHost = "http://" + hostName + (port ? port : 80);
+    socketHost = "http://" + hostName + ":" + (port ? port : 80);
     return api;
 }
 
@@ -43,4 +37,8 @@ function subscribe(context, event, key, callback) {
     return api;
 }
 
-export { api };
+var api = {
+    sub: subscribe,
+    setHost: setHost,
+    start: start
+};
