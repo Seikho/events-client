@@ -1,14 +1,13 @@
 var io = require("socket.io-client");
-var cfg = require("ls-config");
 var api = {
     sub: subscribe,
     setHost: setHost,
     start: start
 };
+var socketClient;
 // Default URL 
 var socketHost = "http://localhost";
 function start() {
-    cfg.config("io", connect());
     return api;
 }
 function setHost(hostName, port) {
@@ -16,11 +15,9 @@ function setHost(hostName, port) {
     return api;
 }
 function connect() {
-    var socket = io(socketHost);
-    return socket;
+    socketClient = io(socketHost);
 }
 function subscribe(context, event, key, callback) {
-    var socket = cfg.config("socket");
     var subChannel = [
         (context ? context : "*"),
         (event ? event : "*"),
@@ -31,8 +28,8 @@ function subscribe(context, event, key, callback) {
         channel: subChannel,
         token: authToken
     };
-    socket.emit("subscribe", JSON.stringify(opts));
-    socket.on(subChannel, callback);
+    socketClient.emit("subscribe", JSON.stringify(opts));
+    socketClient.on(subChannel, callback);
     return api;
 }
 module.exports = api;

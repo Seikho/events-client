@@ -1,5 +1,5 @@
 import io = require("socket.io-client");
-var cfg = require("ls-config");
+
 export = api;
 
 var api = {
@@ -8,11 +8,12 @@ var api = {
 	start: start
 };
 
+var socketClient: SocketIOClient.Socket;
+
 // Default URL 
 var socketHost = "http://localhost";
 
 function start() {
-	cfg.config("io", connect());
 	return api;
 }
 
@@ -22,13 +23,11 @@ function setHost(hostName: string, port?: number) {
 }
 
 function connect() {
-	var socket = io(socketHost);
-	return socket;
+	socketClient = io(socketHost);
 }
 
 function subscribe(context: string, event: string, key: string, callback: (channel: string, message: string) => void) {
-	var socket: SocketIOClient.Socket = cfg.config("socket");
-	
+
 	var subChannel = [
 		(context ? context : "*"),
 		(event ? event : "*"),
@@ -41,7 +40,7 @@ function subscribe(context: string, event: string, key: string, callback: (chann
 		token: authToken
 	};
 	
-	socket.emit("subscribe", JSON.stringify(opts));
-	socket.on(subChannel, callback);
+	socketClient.emit("subscribe", JSON.stringify(opts));
+	socketClient.on(subChannel, callback);
 	return api;
 }
