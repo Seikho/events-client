@@ -42,3 +42,5 @@ var api = {
     setHost: setHost,
     start: start
 };
+
+module.exports = api;
