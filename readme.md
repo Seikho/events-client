@@ -14,7 +14,7 @@ import events = require("ls-events-client");
 events
 	.setHost("localhost", 10001);
 	.start()
-	.subscribe("notifications", function(msg) {
+	.sub("notifications", function(msg) {
 		// ...
 	});
 ```
