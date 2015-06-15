@@ -1,9 +1,10 @@
 import io = require("socket.io-client");
 var cfg = require("ls-config");
+export = api;
 
-export = {
+var api = {
 	sub: subscribe,
-	setUrl: setUrl,
+	setHost: setHost,
 	start: start
 };
 
@@ -12,10 +13,12 @@ var socketHost = "http://localhost";
 
 function start() {
 	cfg.config("io", connect());
+	return api;
 }
 
-function setUrl(hostName: string, port?: number) {
+function setHost(hostName: string, port?: number) {
 	socketHost = "http://" + hostName + (port?port:80);
+	return api;
 }
 
 function connect() {
@@ -40,4 +43,5 @@ function subscribe(context: string, event: string, key: string, callback: (chann
 	
 	socket.emit("subscribe", JSON.stringify(opts));
 	socket.on(subChannel, callback);
+	return api;
 }

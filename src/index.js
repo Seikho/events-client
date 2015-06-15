@@ -1,12 +1,19 @@
 var io = require("socket.io-client");
 var cfg = require("ls-config");
+var api = {
+    sub: subscribe,
+    setHost: setHost,
+    start: start
+};
 // Default URL 
 var socketHost = "http://localhost";
 function start() {
     cfg.config("io", connect());
+    return api;
 }
-function setUrl(hostName, port) {
+function setHost(hostName, port) {
     socketHost = "http://" + hostName + (port ? port : 80);
+    return api;
 }
 function connect() {
     var socket = io(socketHost);
@@ -26,9 +33,6 @@ function subscribe(context, event, key, callback) {
     };
     socket.emit("subscribe", JSON.stringify(opts));
     socket.on(subChannel, callback);
+    return api;
 }
-module.exports = {
-    sub: subscribe,
-    setUrl: setUrl,
-    start: start
-};
+module.exports = api;
