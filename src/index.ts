@@ -14,6 +14,7 @@ var socketClient: SocketIOClient.Socket;
 var socketHost = "http://localhost";
 
 function start() {
+	connect();
 	return api;
 }
 
